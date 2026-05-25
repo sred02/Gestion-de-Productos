@@ -7,20 +7,9 @@
       "config": {
         "maxLambdaSize": "15mb"
       }
-    },
-    {
-      "src": "build_files.sh",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "uniweb2/staticfiles"
-      }
     }
   ],
   "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/uniweb2/staticfiles/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "app.py"
