@@ -12,8 +12,10 @@ __pycache__/
 
 # Django
 *.sqlite3
-uniweb2/staticfiles/
 media/
+
+# staticfiles se incluye en el repo para que Vercel lo sirva con WhiteNoise
+# uniweb2/staticfiles/
 
 # IDEs
 .vscode/
