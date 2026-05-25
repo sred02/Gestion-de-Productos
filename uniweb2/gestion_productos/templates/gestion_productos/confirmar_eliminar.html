@@ -1,0 +1,20 @@
+{% extends 'gestion_productos/base.html' %}
+
+{% block title %}Eliminar Producto{% endblock %}
+
+{% block content %}
+    <h1>Eliminar Producto</h1>
+
+    <div class="confirm-box">
+        <p>¿Estás seguro de que deseas eliminar el producto <strong>{{ producto.nombre_producto }}</strong>?</p>
+        <p>Esta acción no se puede deshacer.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="actions-group">
+                <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+                <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

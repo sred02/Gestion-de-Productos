@@ -1,0 +1,14 @@
+{% extends 'gestion_productos/base.html' %}
+
+{% block title %}Inicio - Sistema de Gestión de Productos{% endblock %}
+
+{% block content %}
+    <h1>Bienvenido al Sistema de Gestión de Productos</h1>
+    <p class="header-subtitle">¿Qué deseas hacer?</p>
+    
+    <div class="actions-group">
+        <a href="{% url 'guardar_producto' %}" class="btn">Registrar Producto</a>
+        <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Ver Productos</a>
+        
+    </div>
+{% endblock %}

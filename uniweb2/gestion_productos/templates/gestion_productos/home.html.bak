@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio - Sistema de Estudiantes</title>
+</head>
+<body>
+    <h1>Bienvenido al Sistema de Estudiantes</h1>
+    <p>Selecciona una opción:</p>
+    <ul>
+        <li><a href="{% url 'guardar_estudiante' %}">Registrar Nuevo Estudiante</a></li>
+        <li><a href="{% url 'lista_estudiantes' %}">Ver Lista de Estudiantes</a></li>
+    </ul>
+</body>
+</html>
