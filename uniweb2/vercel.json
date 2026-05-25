@@ -2,16 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "uniweb2/wsgi.py",
+      "src": "app.py",
       "use": "@vercel/python",
       "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.12"
+        "maxLambdaSize": "15mb"
       }
     },
     {
-      "src": "staticfiles/**",
-      "use": "@vercel/static"
+      "src": "build_files.sh",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "staticfiles"
+      }
     }
   ],
   "routes": [
@@ -21,7 +23,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "uniweb2/wsgi.py"
+      "dest": "app.py"
     }
   ]
 }
