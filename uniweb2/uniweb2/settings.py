@@ -3,29 +3,19 @@ Django settings for uniweb2 project.
 """
 
 from pathlib import Path
-from decouple import config, Csv
+from decouple import config
 import dj_database_url
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ─── Seguridad ────────────────────────────────────────────────────────────────
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-
-# Acepta cualquier host — Vercel gestiona la seguridad del dominio externamente
 ALLOWED_HOSTS = ['*']
 
-# Seguridad HTTPS (activa solo en producción cuando DEBUG=False)
-# SECURE_SSL_REDIRECT se deja en False porque Vercel ya fuerza HTTPS en su proxy
-if not DEBUG:
-    SECURE_SSL_REDIRECT = False
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# Vercel ya termina SSL en su proxy — no redirigir desde Django
+SECURE_SSL_REDIRECT = False
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # ─── Aplicaciones ─────────────────────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -41,7 +31,7 @@ INSTALLED_APPS = [
 # ─── Middleware ────────────────────────────────────────────────────────────────
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   # sirve estáticos en producción
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -95,8 +85,6 @@ USE_TZ = True
 # ─── Archivos estáticos ───────────────────────────────────────────────────────
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# WhiteNoise: comprime y cachea los estáticos automáticamente
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ─── Misc ─────────────────────────────────────────────────────────────────────
