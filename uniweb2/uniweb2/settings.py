@@ -12,12 +12,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ─── Seguridad ────────────────────────────────────────────────────────────────
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
+
+# Acepta cualquier host — Vercel gestiona la seguridad del dominio externamente
+ALLOWED_HOSTS = ['*']
 
 # Seguridad HTTPS (activa solo en producción cuando DEBUG=False)
+# SECURE_SSL_REDIRECT se deja en False porque Vercel ya fuerza HTTPS en su proxy
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SECURE_HSTS_SECONDS = 31536000          # 1 año
+    SECURE_SSL_REDIRECT = False
+    SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     SESSION_COOKIE_SECURE = True
